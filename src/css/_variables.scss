@@ -1,0 +1,41 @@
+
+
+$colors: (
+    primary: #fff,
+    secondary:#000,
+);
+$background-colors:(
+    primary:#344264,
+    secondary: #26324F,
+    third: #332B5B,
+    fourth:#1E2B48,
+    fifth:#A20E2D
+);
+
+// Mixin for media quries  phone, table, portable-devices and desktop
+@mixin screen-size($size) {
+    @if $size == phone{
+        @media (max-width: 600px) { @content; }
+    }
+    @else if $size == tablet{
+        @media(min-width:601px) {@content;}
+    }
+    @else if $size == portable{
+        @media(max-width:899px) {@content;}
+    }
+    @else if $size == desktop{
+        @media(min-width:900px) {@content;}
+    }
+    
+}
+// Mixin for flex with row and column direction
+@mixin flex($direction){
+    display:flex;
+    flex-wrap: wrap;
+    @if $direction == row{
+        flex-direction: row;
+    } 
+    @else if $direction == column{
+        flex-direction: row;
+    }
+}

@@ -1,0 +1,837 @@
+/*
+Sass file for the layout Olof Andersson 
+*/
+@import 'variables';
+
+/*
+Header section
+*/
+html,
+body {
+    height: 100%;
+}
+
+body {
+
+    background-color: map-get($background-colors, primary);
+    display: flex;
+    flex-direction: column;
+}
+
+#main-page {
+    padding-bottom: 50vh;
+}
+
+// Side bar for social media icons for larger screens
+#side-bar {
+    width: 4%;
+    position: fixed;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    border-left: 2px solid black;
+
+    @include screen-size(portable) {
+        position: static;
+        background: none;
+        width: 100vw;
+        display: none;
+    }
+
+    ul {
+        width: 50%;
+        height: 100vh;
+        margin: 50vh auto 0 auto;
+
+        li {
+            @include screen-size(phone) {
+                display: inline-block;
+            }
+
+            list-style-type: none;
+            padding: 15% 0 15% 0;
+            font-size: 2em;
+
+            .fa {
+                color: #fff;
+                text-decoration: none;
+
+                &:hover {
+                    color: #1E2B48;
+                }
+            }
+        }
+
+    }
+
+}
+
+/*Header section*/
+header {
+    grid-column: 1/13;
+    position: relative;
+    width: 100%;
+    margin: 0% auto;
+    background-color: map-get($background-colors, secondary);
+
+    // Set max-width to flex row in the header
+    .max-width {
+        @include flex(row);
+    }
+
+    //H1 tag link
+    a {
+        width: 40%;
+        text-decoration: none;
+        color: #000;
+
+        @include screen-size(portable) {
+            width: 70%;
+        }
+
+        h1 {
+            @include screen-size(phone) {
+                margin-left: 5%;
+            }
+
+            font-size: 2.2em;
+
+            width:40%;
+            color: map-get($colors, primary);
+
+            span {
+                color: #B22657;
+            }
+        }
+    }
+
+    nav {
+        width: 50%;
+
+        @include screen-size(portable) {
+            position: fixed;
+            top: -150%;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            transition: top 0.5s ease-in;
+            background: rgb(99, 89, 145);
+            background: linear-gradient(0deg, rgba(99, 89, 145, 1) 7%, rgba(83, 86, 133, 1) 31%);
+            z-index: 5;
+        }
+
+        h2 {
+            @include screen-size(desktop) {
+                display: none;
+            }
+
+            width:50%;
+            color: map-get($colors, primary);
+            margin:5% 0 0 5%;
+        }
+
+        ul {
+            width: 100%;
+            text-align: right;
+
+            @include screen-size(portable) {
+                width: 50%;
+                margin: 25vh auto 0 auto;
+                text-align: left;
+            }
+
+            li {
+                position: relative;
+
+                .contactMe {
+                    background-color: #A20E2D;
+                    padding: 2% 10% 2% 10%;
+                }
+
+                @include screen-size(portable) {
+                    display: block;
+
+                    .contactMe {
+                        background: none;
+                        padding: 0;
+                    }
+
+                    &:after {
+                        content: "";
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        border-bottom: 3px solid map-get($colors, primary);
+                        ;
+                        z-index: 5;
+                        width: 0%;
+                        transition: width 1s linear;
+
+
+                    }
+
+                    &:hover:after {
+                        width: 100%;
+
+                    }
+                }
+
+                margin-left:5%;
+
+                display: inline-block;
+                list-style-type: none;
+
+                a {
+                    font-size: 1.2em;
+                    width: 100%;
+                    text-decoration: none;
+
+                    @include screen-size(portable) {
+                        color: map-get($colors, primary);
+                    }
+
+                    color: map-get($colors, primary);
+
+                    @include screen-size(desktop) {
+                        &:hover {
+                            color: orange;
+                        }
+                    }
+
+                }
+
+            }
+        }
+
+    }
+
+    // Set hamburger to display none for desktop
+    .hamburger {
+        @include screen-size(desktop) {
+            display: none;
+        }
+
+        color: map-get($colors, primary);
+        margin-left:5%;
+        height:0;
+        
+    }
+
+    article {
+        @include screen-size(portable) {
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        font-size: 1.1em;
+        color: map-get($colors, primary);
+        width:50%;
+        margin-left: 50%;
+        @include screen-size(desktop) {
+            font-size: 1.3em;
+        }
+        p {
+            width: 90%;
+        }
+    }
+
+    //Container for the scrolling icon
+    #scrolling-container {
+        @include screen-size(phone) {
+            width: 100%;
+        }
+
+        margin: 20% auto 0 auto;
+
+        #scroll {
+            border-radius: 50%;
+            margin: 10px;
+            height: 80px;
+            width: 80px;
+            box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
+            transform: scale(1);
+            animation: pulse-ani 2s infinite;
+            position: relative;
+            margin: 0 auto;
+
+            img {
+                width: 30%;
+                position: absolute;
+                left: 35%;
+                top: 25%;
+                padding: 0;
+            }
+
+
+        }
+    }
+}
+
+/*
+Wrapper section using display grid
+*/
+#wrapper {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    width: 100%;
+    padding: 0;
+    margin: 0 auto;
+    min-height: 100%;
+    flex: 1 0 auto;
+    margin-bottom: -50px;
+
+
+    //div used for setting max-width inside a section
+    .max-width {
+        max-width: 1120px;
+        margin: 5% auto;
+        width: 95%;
+
+        @include screen-size(desktop) {
+            @include flex(row);
+        }
+
+        @include screen-size(tablet) {
+            @include flex(row);
+        }
+    }
+
+    .content {
+        grid-column: 1/13;
+        width: 95%;
+        margin: 2% auto 15% auto;
+        background-color: #fff;
+
+
+        @include screen-size(desktop) {
+            @include flex(row);
+        }
+
+        article {
+            width: 45%;
+            margin: 0 2%  2% 0;
+
+            @include screen-size(phone) {
+                width: 100%;
+            }
+        }
+
+        div {
+            position: relative;
+
+            h3 {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                z-index: 5;
+                color: map-get($colors, primary);
+                text-align: center;
+            }
+        }
+
+
+        .img-box {
+            width: 50%;
+        }
+
+        .img-animation-box {
+            display: block;
+            width: 50%;
+            background-color: #2D2D32;
+            height: auto;
+
+
+        }
+
+
+
+        #imgAbout {
+            width: 50%;
+
+            img {
+                width: 100%;
+                margin: 0;
+                opacity: 1;
+            }
+        }
+
+
+    }
+
+    #contact {
+        grid-column: 1/13;
+        padding:0;
+
+        h2 {
+            color: map-get($colors, primary);
+        }
+
+        /*Form section */
+        form {
+
+            padding: 2%;
+            @include flex(column);
+            width: 96%;
+            animation: slide-up 1s ease-in;
+    
+            input[type=text],
+            input[type=email] {
+                width: 90%;
+                border: none;
+                border-bottom: 1px solid #fff;
+                padding: 1% 0 1% 0;
+                outline: none !important;
+                background: none;
+                color: map-get($colors, primary);
+
+            }
+
+            input[type=submit] {
+                width: 20%;
+                padding: 1% 0 1% 0;
+                margin-top: 2%;
+                border: none;
+                outline: none !important;
+                background-color: #7385E2;
+                color: #fff;
+                transform: scale(1);
+                transition: transform 0.2s linear;
+                cursor: pointer;
+
+                &:hover {
+                    transform: scale(1.2);
+                    transition: transform 0.2s linear;
+                }
+            }
+
+            label {
+                margin: 2% 0 0% 0;
+                width: 100%;
+                color: map-get($colors, primary);
+            }
+
+            textarea {
+                width: 90%;
+                resize: none;
+                outline: none !important;
+            }
+
+        }
+    }
+
+    /*Section for displaying a indivdual website info */
+    #website {
+        grid-column: 1/13;
+        width: 100%;
+        margin: 2% auto 15% auto;
+        color: map-get($colors, primary);
+
+        article {
+            width: 30%;
+            height: 40%;
+
+            @include screen-size(portable) {
+                width: 95%;
+                margin: 2% auto 5% auto;
+            }
+        }
+
+        h3,
+        h4 {
+            width: 100%;
+        }
+
+        @include screen-size(desktop) {
+            @include flex(row);
+        }
+
+        img {
+            width: 50%;
+
+            @include screen-size(phone) {
+                width: 95%;
+                margin: 0 auto;
+            }
+        }
+
+        .button {
+            background-color: #7385E2;
+            width: 30%;
+            height: auto;
+            text-align: center;
+            cursor: pointer;
+
+            a {
+                text-decoration: none;
+                color: map-get($colors, primary);
+            }
+
+            &:hover {
+                transform: scale(1.2);
+                transition: transform 0.2s linear;
+            }
+        }
+    }
+
+    //container for the images smaller version
+    .img-content {
+        grid-column: 1/13;
+        width: 100%;
+
+
+        .img-container {
+            @include screen-size(phone) {
+                width: 85%;
+                margin: 5% auto 5% auto;
+
+            }
+
+            width: 45%;
+            margin: 3% 0 0 0;
+            position: relative;
+            height:100%;
+            padding-right: 5%;
+            transform:scale(1);
+            transition: transform 0.3s linear;
+
+            &:hover {
+                z-index: 5;
+
+                img {
+                    opacity: 0.5;
+
+
+                }
+            }
+
+            img {
+                display: block;
+                width: 50%;
+                background-color: #2D2D32;
+                animation: slide-in 1.2s ease-in;
+                height: auto;
+            }
+
+            #image-text {
+                position: absolute;
+                left: 0%;
+                bottom: 0%;
+                z-index: 15;
+                text-align: left;
+                font-size: 1.4em;
+                padding: 0.5% 0 0.5% 0;
+                color: map-get($colors, secondary);
+                background-color: orange;
+
+                user-select: none;
+            }
+
+
+            img {
+                width: 100%;
+                -webkit-box-shadow: 5px 5px 7px 5px rgba(0, 0, 0, 0.2);
+                box-shadow: 5px 5px 7px 5px rgba(0, 0, 0, 0.2);
+                height: 100%;
+
+
+            }
+
+        }
+
+
+    }
+
+    /*Personal info container */
+    .info {
+        grid-column: 1/13;
+        width: 100%;
+        background-color: map-get($background-colors, third);
+        padding-bottom: 5%;
+
+        @include screen-size(desktop) {
+            @include flex(row);
+        }
+
+        h2 {
+            color: map-get($colors, primary);
+            width: 100%;
+            position: relative;
+            height: 5%;
+            margin-bottom: 5%;
+
+            &:after {
+                content: "";
+                border-bottom: 2px solid orange;
+                width: 20%;
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                z-index: 2;
+            }
+        }
+
+        #about {
+            @include screen-size(portable) {
+                width: 96%;
+            }
+
+            width:36%;
+            padding:2%;
+            color: map-get($colors, primary);
+
+            h3 {
+                padding: 2% 0 0 0;
+                height: 5%;
+                margin: 0;
+                width: 90%;
+            }
+
+            p {
+                margin-top: 5%;
+                width: 90%;
+            }
+        }
+
+        #imgAbout {
+            margin-top: 0;
+            width: 40%;
+
+            @include screen-size(phone) {
+                width: 100%;
+            }
+
+            .imgAnimation {
+                width: 90%;
+                position: relative;
+                animation: slide-inImg 1.5s linear;
+            }
+
+            img {
+                width: 100%;
+            }
+        }
+
+        //Container for the skill list 
+        .skill {
+            padding: 0;
+            width: 100%;
+            margin-bottom: 2%;
+
+            h3 {
+                width: 100%;
+                margin: 2% 0 1% 0;
+                padding-bottom: 1%;
+                text-align: left;
+                color: map-get($colors, primary);
+                position: relative;
+              
+
+                &:after {
+                    content: "";
+                    border-bottom: 2px solid orange;
+                    width: 20%;
+                    position: absolute;
+                    left: 0;
+                    bottom: 0;
+                    z-index: 2;
+                }
+            }
+            .displaySkill{
+                cursor: pointer;
+                div{
+                    display: none;
+                    font-size: 0.8em;
+                    margin-bottom: 2%;
+                    @include screen-size(portable) {
+                        font-size: 0.6em;
+                    }
+                    ul {
+                        width: 100%;
+                        margin-top: 2%;
+                
+        
+                        li {
+                            @include screen-size(portable) {
+                                margin: 1% 0 1% 0;
+                            }
+                            display: inline-block;
+                            width:auto;
+                            margin:0.5% 0 0.5% 0;
+                        }
+                    }
+    
+                }
+                }
+               
+
+   
+        }
+    }
+
+    // container for the error message
+    #Error-message {
+        grid-column: 2/11;
+        width: 50%;
+        background-color: map-get($background-colors, fifth);
+        margin: 0 auto;
+        color: map-get($colors, primary);
+        transition: all 1s linear;
+        animation: Error 1s ease-in;
+        margin-bottom: 10%;
+
+        @include screen-size(portable) {
+            width: 90%;
+            grid-column: 1/13;
+        }
+
+        h3,
+        h4 {
+            width: 40%;
+            margin: 1% auto 0.5% auto;
+
+            @include screen-size(portable) {
+                width: 90%;
+            }
+        }
+    }
+}
+
+
+footer {
+    margin-top: 1%;
+
+    @include screen-size(phone) {
+        margin-top: 10%;
+    }
+
+    width: 100%;
+    text-align: center;
+    padding: 5% 0 5% 0;
+    flex-shrink: 0;
+    color: map-get($colors, primary);
+    background-color: map-get($background-colors, fourth);
+
+    li {
+        @include screen-size(phone) {
+            display:block;
+        }
+        @include screen-size(tablet) {
+            display:inline-block;
+            padding-left:2%;
+        }
+        @include screen-size(desktop) {
+            display: none;
+        }
+
+        list-style-type: none;
+        padding: 2% 0 2% 0;
+        font-size: 2em;
+
+        .fa {
+            color: #fff;
+            text-decoration: none;
+
+            &:hover {
+                color:  orange;
+            }
+        }
+    }
+}
+
+/*
+Keyframes animation section
+*/
+
+@keyframes slide-up {
+    from {
+        transform: scaleY(0);
+        transform-origin: bottom;
+    }
+
+    to {
+        transform: scaleY(1);
+        transform-origin: bottom;
+    }
+}
+
+
+@keyframes background-slide {
+    from {
+        width: 0%;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+//keyframe for creating pulsing effect used in the mouse icon
+@keyframes pulse-ani {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+    }
+
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 5px rgba(255, 255, 255, 0);
+    }
+
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+    }
+}
+
+@keyframes overlay-animation {
+    0% {
+        height: 100vh;
+        position: fixed;
+    }
+
+    99% {
+        height: 0vh;
+        position: fixed;
+    }
+
+    100% {
+        position: static;
+    }
+
+}
+
+@keyframes slide-inText {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes slide-inImg {
+    0% {
+        opacity: 0;
+        left: -100%;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    100% {
+        left: 0;
+    }
+}
+
+@keyframes Error {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
