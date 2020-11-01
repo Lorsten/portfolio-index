@@ -2,7 +2,7 @@
 
 ### A portfolio website using a API for it's data.
 
-### THe website use FETCH APi to retrive the data from the server https://github.com/Lorsten/portfolio-server
+### The website use FETCH APi to retrive the data from the server https://github.com/Lorsten/portfolio-server
 
 ### To use website change the url inside the JAvascript to your server.
 
